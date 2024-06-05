@@ -2,7 +2,7 @@
 
 ## Overview
 
-Shelper (Shell + Helper) is a command-line tool that provides terminal commands based on user input optimized for MacOS. It uses OpenAI's GPT-XX model to generate commands and can copy the generated command to the clipboard making it ready to be pasted and used in a subsequent command.
+Shelper (Shell + Helper) is a command-line tool that provides terminal commands based on user input optimized for MacOS. It uses OpenAI's GPT-XX model to generate commands and can execute the generated command.
 
 ## Install
 
@@ -58,7 +58,23 @@ For example:
 shelper List all files in a directory
 ```
 
-### Clipboard Copy
+### Run command
+
+After the command is generated, you will be prompted to execute the command.
+
+### Example
+
+```sh
+$ shelper Create a new directory named 'testdir'
+
+  COMMAND:
+
+  mkdir testdir
+
+Do you want to execute the command? [Y/n]
+``` -->
+
+<!-- ### Clipboard Copy
 
 After the command is generated, you will be prompted to copy the command to the clipboard. The script supports the following clipboard utilities:
 
@@ -79,7 +95,7 @@ $ shelper Create a new directory named 'testdir'
   mkdir testdir
 
 Do you want to copy the command to the clipboard? [Y/n]
-```
+``` -->
 
 ## Development
 

@@ -43,24 +43,43 @@ MESSAGE=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
 # Remove double quotes if present
 MESSAGE=$(echo "$MESSAGE" | sed 's/^"//' | sed 's/"$//')
 
+
+# Define color codes
+# POP='\033[0;31m' # red
+POP='\033[1;34m' # blue
+NC='\033[0m' # No Color
+
 # Output the command
-echo -e "\n  COMMAND:\n\n  $MESSAGE\n"
+echo -e "\n  COMMAND:\n\n  ${POP}${MESSAGE}${NC}\n"
+
+# Prompt the user to ask if the message should be executed
+read -p "Do you want to execute the command? [Y/n] " EXECUTE_COMMAND
+EXECUTE_COMMAND=${EXECUTE_COMMAND:-Y}
+
+if [[ $EXECUTE_COMMAND =~ ^[Yy]$ ]]; then
+  # Execute the command
+  eval $MESSAGE
+
+  # exit
+  exit 0
+fi
+
 
 # Prompt the user to ask if the message should be copied to the clipboard
-read -p "Do you want to copy the command to the clipboard? [Y/n] " COPY_TO_CLIPBOARD
-COPY_TO_CLIPBOARD=${COPY_TO_CLIPBOARD:-Y}
+# read -p "Do you want to copy the command to the clipboard? [Y/n] " COPY_TO_CLIPBOARD
+# COPY_TO_CLIPBOARD=${COPY_TO_CLIPBOARD:-Y}
 
-if [[ $COPY_TO_CLIPBOARD =~ ^[Yy]$ ]]; then
-  # Copy the message to clipboard based on OS
-  if command -v pbcopy &>/dev/null; then
-    echo "$MESSAGE" | pbcopy
-  elif command -v xclip &>/dev/null; then
-    echo "$MESSAGE" | xclip -selection clipboard
-  elif command -v xsel &>/dev/null; then
-    echo "$MESSAGE" | xsel --clipboard --input
-  elif command -v clip &>/dev/null; then
-    echo "$MESSAGE" | clip
-  else
-    echo "No clipboard utility found. Please install xclip, xsel, pbcopy, or clip."
-  fi
-fi
+# if [[ $COPY_TO_CLIPBOARD =~ ^[Yy]$ ]]; then
+#   # Copy the message to clipboard based on OS
+#   if command -v pbcopy &>/dev/null; then
+#     echo "$MESSAGE" | pbcopy
+#   elif command -v xclip &>/dev/null; then
+#     echo "$MESSAGE" | xclip -selection clipboard
+#   elif command -v xsel &>/dev/null; then
+#     echo "$MESSAGE" | xsel --clipboard --input
+#   elif command -v clip &>/dev/null; then
+#     echo "$MESSAGE" | clip
+#   else
+#     echo "No clipboard utility found. Please install xclip, xsel, pbcopy, or clip."
+#   fi
+# fi
