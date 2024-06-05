@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Initialize variables
-MODEL="gpt-4o" # or any other model you want to use
+MODEL="gpt-4" # or any other model you want to use
 ARG="$@"
 
 # Load the API key from the configuration file
@@ -59,9 +59,6 @@ EXECUTE_COMMAND=${EXECUTE_COMMAND:-Y}
 if [[ $EXECUTE_COMMAND =~ ^[Yy]$ ]]; then
   # Execute the command
   eval $MESSAGE
-
-  # exit
-  exit 0
 fi
 
 
