@@ -72,7 +72,7 @@ $ shelper Create a new directory named 'testdir'
   mkdir testdir
 
 Do you want to execute the command? [Y/n]
-``` -->
+```
 
 <!-- ### Clipboard Copy
 
