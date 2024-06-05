@@ -59,6 +59,16 @@ EXECUTE_COMMAND=${EXECUTE_COMMAND:-Y}
 if [[ $EXECUTE_COMMAND =~ ^[Yy]$ ]]; then
   # Execute the command
   eval $MESSAGE
+  
+  # if ~/.zsh_history exists, append the command to it
+  if [ -f "$HOME/.zsh_history" ]; then
+    echo "$MESSAGE" >> "$HOME/.zsh_history"
+  fi
+
+  # if ~/.bash_history exists, append the command to it
+  if [ -f "$HOME/.bash_history" ]; then
+    echo "$MESSAGE" >> "$HOME/.bash_history"
+  fi
 fi
 
 
